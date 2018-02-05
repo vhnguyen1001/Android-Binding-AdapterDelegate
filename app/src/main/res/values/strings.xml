@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">RecyclerView Binding Sample</string>
+    <string name="page_users">Users</string>
+    <string name="page_locations">Locations</string>
+    <string name="page_all_in_one">All in One</string>
 </resources>

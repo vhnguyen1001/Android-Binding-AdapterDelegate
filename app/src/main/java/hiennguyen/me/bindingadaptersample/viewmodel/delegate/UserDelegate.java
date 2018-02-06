@@ -19,7 +19,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.drextended.actionhandler.listener.ActionClickListener;
+import hiennguyen.me.bindingadapterdelegate.actionhandler.listener.ActionClickListener;
 
 import java.util.List;
 

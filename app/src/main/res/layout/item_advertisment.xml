@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:ignore="RtlHardcoded">
+        >
 
     <data>
 
         <import type="hiennguyen.me.bindingadaptersample.R"/>
 
         <import type="hiennguyen.me.bindingadaptersample.model.ActionType"/>
+        <import type="com.bumptech.glide.load.engine.DiskCacheStrategy" />
 
         <variable
             name="advertisment"
@@ -16,14 +18,17 @@
 
         <variable
             name="actionHandler"
-            type="com.drextended.actionhandler.listener.ActionClickListener"/>
+            type="hiennguyen.me.bindingadapterdelegate.actionhandler.listener.ActionClickListener"/>
     </data>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stateListAnimator="@animator/raise"
-        >
+        app:actionHandler="@{actionHandler}"
+        app:actionType="@{ActionType.OPEN}"
+        app:actionTypeLongClick="@{ActionType.MENU}"
+        app:model="@{advertisment}">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -36,7 +41,7 @@
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
                 app:glideAnimation="@{R.anim.slide_in_top}"
-                app:glideCacheStrategy='@{"ALL"}'
+                app:glideCacheStrategy="@{DiskCacheStrategy.ALL}"
                 app:glidePath="@{advertisment.image}"
                 app:glidePlaceholder="@{@android:drawable/ic_menu_gallery}"
                 tools:src="@android:drawable/ic_menu_gallery"/>

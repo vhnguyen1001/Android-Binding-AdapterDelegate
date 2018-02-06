@@ -2,4 +2,5 @@
     <string name="app_name">My Library</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae sagittis enim, sit amet elementum ante. Quisque sit amet volutpat est, nec interdum sem. Sed semper tristique augue, eget dignissim eros efficitur in. Etiam metus metus, egestas id dui in, varius ullamcorper sem. Vivamus sit amet blandit lacus. Curabitur congue mollis massa ac iaculis. Donec vitae lacus purus. Donec aliquam rutrum velit non maximus. Duis id tincidunt quam. Suspendisse feugiat scelerisque purus vel condimentum. Proin ut velit ipsum. Sed interdum auctor iaculis. Donec ornare ante ac laoreet condimentum. Nullam tempor, leo ac consequat tempor, ex arcu varius lacus, a ullamcorper nunc lorem nec sapien. Praesent non consectetur leo.</string>
     <string name="add_to_cart">Add to cart</string>
+    <string name="action_handler_dialog_message_wait">Wait please…</string>
 </resources>

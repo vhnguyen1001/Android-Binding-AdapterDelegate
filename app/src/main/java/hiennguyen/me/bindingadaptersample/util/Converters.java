@@ -19,24 +19,28 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.databinding.BindingAdapter;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
-import com.drextended.actionhandler.listener.ActionClickListener;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.signature.ObjectKey;
+
+import hiennguyen.me.bindingadapterdelegate.actionhandler.listener.ActionClickListener;
 
 /**
  * All Binding Adapters and converters in one place
  */
 public class Converters {
 
-    @BindingAdapter(value = {"glidePath", "glidePlaceholder", "glideSignature", "glideCacheStrategy", "glideCrossFadeDisabled", "glideAnimation", "glideTransform"}, requireAll = false)
-    public static void setImageUri(ImageView imageView, String path, Drawable placeholder, String glideSignature, String glideCacheStrategy, boolean crossFadeDisabled, Integer animationResId, String glideTransform) {
+    @BindingAdapter(value = {"glidePath", "glidePlaceholder", "glideSignature", "glideCacheStrategy", "glideCrossFadeDisabled",
+            "glideAnimation", "glideTransform"}, requireAll = false)
+    public static void setImageUri(ImageView imageView, String path, Drawable placeholder, String glideSignature, DiskCacheStrategy glideCacheStrategy,
+                                   boolean crossFadeDisabled, Integer animationResId, String glideTransform) {
         Context context = imageView.getContext();
 
         if (context instanceof Activity && ((Activity) context).isFinishing()) return;
@@ -51,38 +55,39 @@ public class Converters {
             }
             return;
         }
-//        try {
-//            RequestOptions request = new RequestOptions();
-//
-//            if (placeholder != null) {
-//                if (!crossFadeDisabled && animationResId == null) request.crossFade();
-//                request.placeholder(placeholder);
-//            }
-//            if (animationResId != null) {
-//                request.animate(animationResId);
-//            }
-//            if (!TextUtils.isEmpty(glideSignature)) {
-//                request.signature(new StringSignature(glideSignature));
-//            }
-//            if (glideTransform != null) {
-//                switch (glideTransform) {
-//                    case "CIRCLE":
-//                        request.bitmapTransform(
-//                                new CircleBorderedTransform(Glide.get(context).getBitmapPool(), Color.WHITE));
-//                        break;
-//                    case "BLUR":
-//                        break;
-//                }
-//            }
-//
-//            if (!TextUtils.isEmpty(glideCacheStrategy)) {
-//                request.diskCacheStrategy(DiskCacheStrategy.valueOf(glideCacheStrategy));
-//            }
-//
-//            request.into(imageView);
-//        } catch (IllegalArgumentException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            GlideRequest<Drawable> requests = GlideApp.with(context).load(path);
+
+            if (placeholder != null) {
+                if (!crossFadeDisabled && animationResId == null) {
+                    requests.transition(new DrawableTransitionOptions().crossFade());
+                }
+                requests.placeholder(placeholder);
+            }
+            if (animationResId != null) {
+                requests.transition(GenericTransitionOptions.with(animationResId));
+            }
+            if (!TextUtils.isEmpty(glideSignature)) {
+                requests.signature(new ObjectKey(glideSignature));
+            }
+            if (glideTransform != null) {
+                switch (glideTransform) {
+                    case "CIRCLE":
+                        requests.transform(new CircleCrop());
+                        break;
+                    case "BLUR":
+                        break;
+                }
+            }
+
+            if(glideCacheStrategy != null) {
+                requests.diskCacheStrategy(glideCacheStrategy);
+            }
+
+            requests.into(imageView);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
 
     @BindingAdapter(

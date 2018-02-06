@@ -18,7 +18,8 @@ package hiennguyen.me.bindingadapterdelegate.delegate;
 
 import android.databinding.ViewDataBinding;
 
-import com.drextended.actionhandler.listener.ActionClickListener;
+import hiennguyen.me.bindingadapterdelegate.actionhandler.listener.ActionClickListener;
+
 
 /**
  * Base AdapterDelegate to use with data binding and with ability to set actionHandler

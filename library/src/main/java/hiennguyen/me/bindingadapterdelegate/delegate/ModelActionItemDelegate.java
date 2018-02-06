@@ -21,9 +21,8 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
-import com.drextended.actionhandler.listener.ActionClickListener;
-
 import hiennguyen.me.bindingadapterdelegate.BR;
+import hiennguyen.me.bindingadapterdelegate.actionhandler.listener.ActionClickListener;
 import hiennguyen.me.bindingadapterdelegate.adapter.BindingHolder;
 
 /**

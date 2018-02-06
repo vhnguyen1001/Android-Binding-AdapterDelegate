@@ -18,7 +18,7 @@ package hiennguyen.me.bindingadaptersample.viewmodel;
 import android.content.Context;
 import android.view.View;
 
-import com.drextended.actionhandler.listener.ActionClickListener;
+import hiennguyen.me.bindingadapterdelegate.actionhandler.listener.ActionClickListener;
 
 import java.util.ArrayList;
 import java.util.List;

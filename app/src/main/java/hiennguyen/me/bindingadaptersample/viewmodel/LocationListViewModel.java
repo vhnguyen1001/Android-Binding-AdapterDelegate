@@ -19,8 +19,8 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.drextended.actionhandler.ActionHandler;
-import com.drextended.actionhandler.listener.ActionClickListener;
+import hiennguyen.me.bindingadapterdelegate.actionhandler.ActionHandler;
+import hiennguyen.me.bindingadapterdelegate.actionhandler.listener.ActionClickListener;
 
 import hiennguyen.me.bindingadapterdelegate.util.DividerItemDecoration;
 import hiennguyen.me.bindingadaptersample.model.ActionType;

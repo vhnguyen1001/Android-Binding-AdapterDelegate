@@ -64,7 +64,6 @@ public class AllInOneListViewModel implements ListViewModel {
                 .setDefaultDividerEnabled(true)
                 .build(context);
 
-        loadData();
     }
 
     @Override
@@ -75,9 +74,9 @@ public class AllInOneListViewModel implements ListViewModel {
     @Override
     public void onDestroy() {}
 
-    private void loadData() {
+    @Override
+    public void loadData() {
         mAdapter.setItems(getDummyData());
-        mAdapter.notifyDataSetChanged();
     }
 
     private List<BaseModel> getDummyData() {

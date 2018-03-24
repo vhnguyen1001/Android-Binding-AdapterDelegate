@@ -66,10 +66,11 @@ public abstract class BaseBindableAdapter<T> extends AbsDelegationAdapter<T> {
      */
     @Override
     public long getItemId(int position) {
-        final int viewType = delegatesManager.getItemViewType(items, position);
+        final int viewType = delegatesManager.getItemViewType(getItems(), position);
         final AdapterDelegate<T> delegate = delegatesManager.getDelegateForViewType(viewType);
         //noinspection unchecked
-        return delegate instanceof IdHolder ? ((IdHolder) delegate).getItemId(items, position) : RecyclerView.NO_ID;
+        return delegate instanceof IdHolder ? ((IdHolder) delegate).getItemId(getItems(), position) :
+                RecyclerView.NO_ID;
     }
 
 }

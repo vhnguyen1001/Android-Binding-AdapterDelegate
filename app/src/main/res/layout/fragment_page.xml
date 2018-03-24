@@ -1,5 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,10 +9,25 @@
             type="hiennguyen.me.bindingadaptersample.viewmodel.ListViewModel"/>
     </data>
 
-    <android.support.v7.widget.RecyclerView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:listConfig="@{viewModel.getListConfig()}"/>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_location"
+            app:listConfig="@{viewModel.getListConfig()}"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@android:drawable/ic_menu_zoom"
+            android:onClick="@{(v) -> viewModel.loadData()}"
+            />
+    </FrameLayout>
 
 </layout>
 

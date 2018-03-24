@@ -31,6 +31,7 @@ import hiennguyen.me.bindingadaptersample.util.DummyDataProvider;
 import hiennguyen.me.bindingadaptersample.util.SimpleCallback;
 import hiennguyen.me.bindingadaptersample.viewmodel.delegate.AdvertisementDelegate;
 import hiennguyen.me.bindingadaptersample.viewmodel.delegate.UserDelegate;
+import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 
 /**
  * Viewmodel for page with User and Advertisement item types in one list
@@ -44,13 +45,11 @@ public class UserListViewModel implements ListViewModel, ActionClickListener {
     public UserListViewModel(Context context, final SimpleCallback callback) {
         mCallback = callback;
         mAdapter = new BindableAdapter<>(new BaseModel.ModelDiffCallBack(),
-                new UserDelegate(this),
-                new AdvertisementDelegate(this)
+                new UserDelegate(this)
         );
         mListConfig = new ListConfig.Builder(mAdapter)
                 .setDefaultDividerEnabled(true)
                 .build(context);
-        loadData();
     }
 
     @Override
@@ -63,17 +62,17 @@ public class UserListViewModel implements ListViewModel, ActionClickListener {
         mCallback = null;
     }
 
-    private void loadData() {
+    @Override
+    public void loadData() {
         mAdapter.setItems(getDummyData());
-        mAdapter.notifyDataSetChanged();
     }
 
     private List<BaseModel> getDummyData() {
         ArrayList<BaseModel> list = new ArrayList<>();
         list.addAll(DummyDataProvider.getUsers());
-        list.add(0, DummyDataProvider.getAdvertisment(1));
-        list.add(6, DummyDataProvider.getAdvertisment(2));
-        list.add(12, DummyDataProvider.getAdvertisment(3));
+//        list.add(0, DummyDataProvider.getAdvertisment(1));
+//        list.add(6, DummyDataProvider.getAdvertisment(2));
+//        list.add(12, DummyDataProvider.getAdvertisment(3));
         return list;
     }
 

@@ -4,7 +4,6 @@ import android.support.annotation.RestrictTo;
 import android.support.v7.recyclerview.extensions.DiffCallback;
 import android.support.v7.recyclerview.extensions.ListAdapterConfig;
 import android.support.v7.util.DiffUtil;
-import android.support.v7.util.ListUpdateCallback;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  */
 public class ComputingAdapterChangedHelper<T> {
 
-    private final ListUpdateCallback mUpdateCallback;
+    private final BaseListUpdateCallback mUpdateCallback;
     private final ListAdapterConfig<T> mConfig;
 
 
@@ -30,7 +29,7 @@ public class ComputingAdapterChangedHelper<T> {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public ComputingAdapterChangedHelper(ListUpdateCallback listUpdateCallback, ListAdapterConfig<T> config) {
+    public ComputingAdapterChangedHelper(BaseListUpdateCallback listUpdateCallback, ListAdapterConfig<T> config) {
         mUpdateCallback = listUpdateCallback;
         mConfig = config;
     }
@@ -43,7 +42,7 @@ public class ComputingAdapterChangedHelper<T> {
      * @hide
      */
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    public static class AdapterCallback implements ListUpdateCallback {
+    public static class AdapterCallback implements BaseListUpdateCallback {
         private final RecyclerView.Adapter mAdapter;
 
         public AdapterCallback(RecyclerView.Adapter adapter) {
@@ -68,6 +67,11 @@ public class ComputingAdapterChangedHelper<T> {
         @Override
         public void onChanged(int position, int count, Object payload) {
             mAdapter.notifyItemRangeChanged(position, count, payload);
+        }
+
+        @Override
+        public void onDataChanged() {
+            mAdapter.notifyDataSetChanged();
         }
     }
 
@@ -112,7 +116,7 @@ public class ComputingAdapterChangedHelper<T> {
      * thread.
      * <p>
      * If a List is already present, a diff will be computed asynchronously on a background thread.
-     * When the diff is computed, it will be applied (dispatched to the {@link ListUpdateCallback}),
+     * When the diff is computed, it will be applied (dispatched to the {@link BaseListUpdateCallback}),
      * and the new List will be swapped in.
      *
      * @param newList The new List.
@@ -135,7 +139,7 @@ public class ComputingAdapterChangedHelper<T> {
 
         if (mList == null) {
             // fast simple first insert
-            mUpdateCallback.onInserted(0, newList.size());
+            mUpdateCallback.onDataChanged();
             mList = newList;
             return;
         }

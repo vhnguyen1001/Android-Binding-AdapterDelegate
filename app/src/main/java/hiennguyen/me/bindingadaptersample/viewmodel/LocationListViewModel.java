@@ -63,7 +63,6 @@ public class LocationListViewModel implements ListViewModel {
         );
         mListConfig = createListConfig(context, mAdapter);
 
-        loadData();
     }
 
     private ListConfig createListConfig(final Context context, final RecyclerView.Adapter adapter) {
@@ -87,9 +86,9 @@ public class LocationListViewModel implements ListViewModel {
     @Override
     public void onDestroy() {}
 
-    private void loadData() {
+    @Override
+    public void loadData() {
         mAdapter.setItems(getDummyData());
-        mAdapter.notifyDataSetChanged();
     }
 
     private List<BaseModel> getDummyData() {

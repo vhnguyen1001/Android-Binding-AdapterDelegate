@@ -25,5 +25,7 @@ public interface ListViewModel {
 
     ListConfig getListConfig();
 
+    void loadData();
+
     void onDestroy();
 }

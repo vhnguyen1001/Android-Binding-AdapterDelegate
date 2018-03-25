@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'hiennguyen.me.bindingadapterdelegate'
     PUBLISH_ARTIFACT_ID = 'bindingadapterdelegate'
-    PUBLISH_VERSION = '0.0.5'
+    PUBLISH_VERSION = '0.1.0'
 }
 
 android {

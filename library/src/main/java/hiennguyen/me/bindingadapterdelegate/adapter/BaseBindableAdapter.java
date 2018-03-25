@@ -19,9 +19,9 @@ package hiennguyen.me.bindingadapterdelegate.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
-import com.hannesdorfmann.adapterdelegates3.AbsDelegationAdapter;
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager;
+import hiennguyen.me.bindingadapterdelegate.base.AbsDelegationAdapter;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegate;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegatesManager;
 
 import hiennguyen.me.bindingadapterdelegate.delegate.IdHolder;
 
@@ -66,10 +66,11 @@ public abstract class BaseBindableAdapter<T> extends AbsDelegationAdapter<T> {
      */
     @Override
     public long getItemId(int position) {
-        final int viewType = delegatesManager.getItemViewType(items, position);
+        final int viewType = delegatesManager.getItemViewType(getItems(), position);
         final AdapterDelegate<T> delegate = delegatesManager.getDelegateForViewType(viewType);
         //noinspection unchecked
-        return delegate instanceof IdHolder ? ((IdHolder) delegate).getItemId(items, position) : RecyclerView.NO_ID;
+        return delegate instanceof IdHolder ? ((IdHolder) delegate).getItemId(getItems(), position) :
+                RecyclerView.NO_ID;
     }
 
 }

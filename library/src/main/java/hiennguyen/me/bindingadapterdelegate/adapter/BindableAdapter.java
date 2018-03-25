@@ -20,8 +20,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.recyclerview.extensions.DiffCallback;
 
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegate;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegatesManager;
 
 import java.util.List;
 
@@ -37,7 +37,6 @@ import hiennguyen.me.bindingadapterdelegate.util.ComputingAdapterChangedHelper;
 public class BindableAdapter<ModelList extends List<Model>, Model> extends BaseBindableAdapter<ModelList> {
 
     private final ComputingAdapterChangedHelper<Model> mHelper;
-
 
     public BindableAdapter(@NonNull DiffCallback<Model> diffCallback) {
         mHelper = new ComputingAdapterChangedHelper<>(this, diffCallback);
@@ -85,8 +84,9 @@ public class BindableAdapter<ModelList extends List<Model>, Model> extends BaseB
 
     @Override
     public void setItems(ModelList items) {
-        super.setItems(items);
         mHelper.setList(items);
     }
+
+
 
 }

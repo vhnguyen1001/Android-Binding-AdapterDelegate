@@ -32,5 +32,5 @@ public interface IdHolder<T> {
      * @param position item position in the data source
      * @return stable item id
      */
-    long getItemId(T items, int position);
+    long    getItemId(T items, int position);
 }

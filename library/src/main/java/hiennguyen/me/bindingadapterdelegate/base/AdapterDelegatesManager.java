@@ -14,13 +14,14 @@
  *  limitations under the License.
  */
 
-package com.hannesdorfmann.adapterdelegates3;
+package hiennguyen.me.bindingadapterdelegate.base;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+
 import java.util.Collections;
 import java.util.List;
 

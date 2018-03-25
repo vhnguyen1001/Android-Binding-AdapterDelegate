@@ -19,9 +19,9 @@ package hiennguyen.me.bindingadapterdelegate.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
-import com.hannesdorfmann.adapterdelegates3.AbsDelegationAdapter;
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager;
+import hiennguyen.me.bindingadapterdelegate.base.AbsDelegationAdapter;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegate;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegatesManager;
 
 import hiennguyen.me.bindingadapterdelegate.delegate.IdHolder;
 

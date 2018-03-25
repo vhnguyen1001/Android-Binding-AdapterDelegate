@@ -1,6 +1,9 @@
-package com.hannesdorfmann.adapterdelegates3;
+package hiennguyen.me.bindingadapterdelegate.base;
 
 import android.support.annotation.NonNull;
+
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegate;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegatesManager;
 
 /**
  * This class can be used as base class for a fallback delegate {@link

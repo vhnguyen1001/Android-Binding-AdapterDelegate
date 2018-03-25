@@ -1,9 +1,11 @@
-package com.hannesdorfmann.adapterdelegates3;
+package hiennguyen.me.bindingadapterdelegate.base;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import java.util.List;
+
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegate;
 
 /**
  * A simplified {@link AdapterDelegate} when the underlying adapter's dataset is a  {@linkplain
@@ -37,8 +39,7 @@ import java.util.List;
  * </p>
  * @since 1.2
  */
-public abstract class AbsListItemAdapterDelegate<I extends T, T, VH extends RecyclerView.ViewHolder>
-    extends AdapterDelegate<List<T>> {
+public abstract class AbsListItemAdapterDelegate<I extends T, T, VH extends RecyclerView.ViewHolder> extends AdapterDelegate<List<T>> {
 
   @Override protected final boolean isForViewType(@NonNull List<T> items, int position) {
     return isForViewType(items.get(position), items, position);

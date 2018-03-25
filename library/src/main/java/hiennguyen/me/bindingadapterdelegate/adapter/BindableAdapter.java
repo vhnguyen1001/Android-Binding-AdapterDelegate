@@ -20,8 +20,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.recyclerview.extensions.DiffCallback;
 
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegate;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegatesManager;
 
 import java.util.List;
 

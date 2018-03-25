@@ -14,12 +14,15 @@
  *  limitations under the License.
  */
 
-package com.hannesdorfmann.adapterdelegates3;
+package hiennguyen.me.bindingadapterdelegate.base;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import java.util.List;
+
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegate;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegatesManager;
 
 /**
  * An implementation of an Adapter that already uses a {@link AdapterDelegatesManager} and calls

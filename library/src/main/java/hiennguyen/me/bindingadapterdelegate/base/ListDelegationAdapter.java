@@ -14,9 +14,10 @@
  *  limitations under the License.
  */
 
-package com.hannesdorfmann.adapterdelegates3;
+package hiennguyen.me.bindingadapterdelegate.base;
 
 import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**

@@ -21,7 +21,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
+import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegate;
 
 import java.util.List;
 

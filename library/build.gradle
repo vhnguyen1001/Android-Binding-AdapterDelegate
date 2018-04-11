@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'hiennguyen.me.bindingadapterdelegate'
     PUBLISH_ARTIFACT_ID = 'bindingadapterdelegate'
-    PUBLISH_VERSION = '0.1.0'
+    PUBLISH_VERSION = '0.1.1'
 }
 
 android {
@@ -50,7 +50,7 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
 
 
-    compile 'android.arch.paging:runtime:1.0.0-alpha5'
+    api 'android.arch.paging:runtime:1.0.0-beta1'
 
 }
 

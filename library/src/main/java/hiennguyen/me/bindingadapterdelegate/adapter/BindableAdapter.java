@@ -18,14 +18,14 @@ package hiennguyen.me.bindingadapterdelegate.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.recyclerview.extensions.DiffCallback;
+import android.support.v7.recyclerview.extensions.AsyncListDiffer;
+import android.support.v7.util.DiffUtil;
 
 import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegate;
 import hiennguyen.me.bindingadapterdelegate.base.AdapterDelegatesManager;
 
 import java.util.List;
 
-import hiennguyen.me.bindingadapterdelegate.util.ComputingAdapterChangedHelper;
 
 /**
  * RecyclerView Adapter for using with data binding. Uses List of items as dataset.
@@ -36,55 +36,55 @@ import hiennguyen.me.bindingadapterdelegate.util.ComputingAdapterChangedHelper;
 
 public class BindableAdapter<ModelList extends List<Model>, Model> extends BaseBindableAdapter<ModelList> {
 
-    private final ComputingAdapterChangedHelper<Model> mHelper;
+    private final AsyncListDiffer<Model> mHelper;
 
-    public BindableAdapter(@NonNull DiffCallback<Model> diffCallback) {
-        mHelper = new ComputingAdapterChangedHelper<>(this, diffCallback);
+    public BindableAdapter(@NonNull DiffUtil.ItemCallback<Model> diffCallback) {
+        mHelper = new AsyncListDiffer<>(this, diffCallback);
     }
 
-    public BindableAdapter(@NonNull DiffCallback<Model> diffCallback, @NonNull final AdapterDelegatesManager<ModelList> delegatesManager) {
+    public BindableAdapter(@NonNull DiffUtil.ItemCallback<Model> diffCallback, @NonNull final AdapterDelegatesManager<ModelList> delegatesManager) {
         super(delegatesManager);
-        mHelper = new ComputingAdapterChangedHelper<>(this, diffCallback);
+        mHelper = new AsyncListDiffer<>(this, diffCallback);
     }
 
-    public BindableAdapter(@NonNull DiffCallback<Model> diffCallback, AdapterDelegate<ModelList>... adapterDelegates) {
+    public BindableAdapter(@NonNull DiffUtil.ItemCallback<Model> diffCallback, AdapterDelegate<ModelList>... adapterDelegates) {
         super(adapterDelegates);
-        mHelper = new ComputingAdapterChangedHelper<>(this, diffCallback);
+        mHelper = new AsyncListDiffer<>(this, diffCallback);
     }
 
-    public BindableAdapter(@NonNull DiffCallback<Model> diffCallback, final ModelList items,
+    public BindableAdapter(@NonNull DiffUtil.ItemCallback<Model> diffCallback, final ModelList items,
                            final AdapterDelegatesManager<ModelList> delegatesManager) {
         super(items, delegatesManager);
-        mHelper = new ComputingAdapterChangedHelper<>(this, diffCallback);
-        mHelper.setList(items);
+        mHelper = new AsyncListDiffer<>(this, diffCallback);
+        mHelper.submitList(items);
     }
 
-    public BindableAdapter(@NonNull DiffCallback<Model> diffCallback, final ModelList items,
+    public BindableAdapter(@NonNull DiffUtil.ItemCallback<Model> diffCallback, final ModelList items,
                            AdapterDelegate<ModelList>... adapterDelegates) {
         super(items, adapterDelegates);
-        mHelper = new ComputingAdapterChangedHelper<>(this, diffCallback);
-        mHelper.setList(items);
+        mHelper = new AsyncListDiffer<>(this, diffCallback);
+        mHelper.submitList(items);
     }
 
     @Override
     public int getItemCount() {
-        return mHelper.getItemCount();
+        return mHelper.getCurrentList().size();
     }
 
     @Override
     public ModelList getItems() {
-        return (ModelList) mHelper.getList();
+        return (ModelList) mHelper.getCurrentList();
     }
 
     @Nullable
     protected Model getItem(int position) {
-        return mHelper.getItem(position);
+        return mHelper.getCurrentList().get(position);
     }
 
 
     @Override
     public void setItems(ModelList items) {
-        mHelper.setList(items);
+        mHelper.submitList(items);
     }
 
 

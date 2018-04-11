@@ -16,7 +16,7 @@
 package hiennguyen.me.bindingadaptersample.model;
 
 import android.support.annotation.NonNull;
-import android.support.v7.recyclerview.extensions.DiffCallback;
+import android.support.v7.util.DiffUtil;
 
 /**
  * Base model
@@ -26,7 +26,7 @@ public interface BaseModel {
 
 
 
-    class ModelDiffCallBack extends DiffCallback<BaseModel> {
+    class ModelDiffCallBack extends DiffUtil.ItemCallback<BaseModel> {
 
         @Override
         public boolean areItemsTheSame(@NonNull BaseModel oldItem, @NonNull BaseModel newItem) {

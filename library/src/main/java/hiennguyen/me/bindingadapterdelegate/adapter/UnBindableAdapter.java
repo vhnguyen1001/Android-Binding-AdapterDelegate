@@ -2,19 +2,20 @@ package hiennguyen.me.bindingadapterdelegate.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.recyclerview.extensions.DiffCallback;
-import android.support.v7.recyclerview.extensions.ListAdapterConfig;
+import android.support.v7.recyclerview.extensions.AsyncDifferConfig;
+import android.support.v7.recyclerview.extensions.AsyncListDiffer;
+import android.support.v7.util.AdapterListUpdateCallback;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
-import hiennguyen.me.bindingadapterdelegate.util.ComputingAdapterChangedHelper;
 
 /**
  * This class is modified from {@link android.arch.paging.PagedListAdapter} for presenting data list from {@link List}
  * in {@link RecyclerView}
  * <p>
- * This class is a convenience wrapper around {@link ComputingAdapterChangedHelper} that implements common default
+ * This class is a convenience wrapper around {@link AsyncDifferConfig} that implements common default
  * behavior for item getting, and listening to List update callbacks in main or background thread.
  * <p>
  *
@@ -23,25 +24,25 @@ import hiennguyen.me.bindingadapterdelegate.util.ComputingAdapterChangedHelper;
  */
 public abstract class UnBindableAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>  {
 
-    private final ComputingAdapterChangedHelper<T> mHelper;
+    private final AsyncListDiffer<T> mHelper;
 
 
     /**
      * Creates a PagedListAdapter with default threading and
      * {@link android.support.v7.util.ListUpdateCallback}.
      *
-     * Convenience for {@link #UnBindableAdapter(ListAdapterConfig)}, which uses default threading
+     * Convenience for {@link #UnBindableAdapter(AsyncDifferConfig)}, which uses default threading
      * behavior.
      *
-     * @param diffCallback The {@link DiffCallback} instance to compare items in the list.
+     * @param diffCallback The {@link android.support.v7.util.DiffUtil.ItemCallback} instance to compare items in the list.
      */
-    protected UnBindableAdapter(@NonNull DiffCallback<T> diffCallback) {
-        mHelper = new ComputingAdapterChangedHelper<>(this, diffCallback);
+    protected UnBindableAdapter(@NonNull DiffUtil.ItemCallback<T> diffCallback) {
+        mHelper = new AsyncListDiffer<>(this, diffCallback);
     }
 
     @SuppressWarnings("unused, WeakerAccess")
-    protected UnBindableAdapter(@NonNull ListAdapterConfig<T> config) {
-        mHelper = new ComputingAdapterChangedHelper<>(new ComputingAdapterChangedHelper.AdapterCallback(this), config);
+    protected UnBindableAdapter(@NonNull AsyncDifferConfig<T> config) {
+        mHelper = new AsyncListDiffer<>(new AdapterListUpdateCallback(this), config);
     }
 
     /**
@@ -53,17 +54,17 @@ public abstract class UnBindableAdapter<T, VH extends RecyclerView.ViewHolder> e
      * @param list The new list to be displayed.
      */
     public void setList(List<T> list) {
-        mHelper.setList(list);
+        mHelper.submitList(list);
     }
 
     @Nullable
     protected T getItem(int position) {
-        return mHelper.getItem(position);
+        return mHelper.getCurrentList().get(position);
     }
 
     @Override
     public int getItemCount() {
-        return mHelper.getItemCount();
+        return mHelper.getCurrentList().size();
     }
 
     /**
@@ -77,6 +78,6 @@ public abstract class UnBindableAdapter<T, VH extends RecyclerView.ViewHolder> e
      */
     @Nullable
     public List<T> getList() {
-        return mHelper.getList();
+        return mHelper.getCurrentList();
     }
 }

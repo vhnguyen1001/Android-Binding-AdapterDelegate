@@ -8,9 +8,9 @@ buildscript {
         maven { url 'https://maven.google.com' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
-        
-
+        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -26,6 +26,10 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+subprojects {
+    tasks.withType(Javadoc).all { enabled = false }
 }
 
 ext {
@@ -45,7 +49,7 @@ ext {
     gsonVersion = "2.8.1"
     glideVersion = "4.5.0"
     rxjavaVersion = "2.1.4"
-    rxandroidVersion = "2.0.1"
+    rxandroidVersion = "2.0.2"
 
     // test
     junitVersion = "4.12"
